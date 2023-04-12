@@ -53,7 +53,11 @@ def search_wikipedia(query = ''):
     wikiSummary = str(wikiPage.summary)
     return wikiSummary
 
-def
+def listOrDict(var):
+    if isinstance(var, list):
+        return var[0]['plaintext']
+    else:
+        return var['plaintext']
 
 def saerch_wolframalpha(query = ''):
     response = wolframalpha.query(query)
@@ -66,6 +70,15 @@ def saerch_wolframalpha(query = ''):
         pod1 = response['pod'][1]
         
         if (('result') in pod1['@title'].lower()) or (pod1.get('@primary', 'false') == 'true') or ('destination' in pod1['@title'].lower()):
+            result = listOrDict(pod1[subpod])
+            return result.split('(')[0]
+        else:
+            question = listOrDict(pod0['sudpod'])
+            
+            return question.split('(')[0]
+        
+            speak('Computation failed. Querying universal databank.')
+            return search_wikipedia(question)
             
 
 # Main loop
@@ -104,7 +117,7 @@ if __name__ == '__main__':
                 query = ' '.join(query[1:])
                 speak('Computing.')
                 try:
-                    result = search_wolframalpha(query)
+                    result = search_wolframAlpha(query)
                     speak(result)
                 except:
                     speak('Unable to compute')
