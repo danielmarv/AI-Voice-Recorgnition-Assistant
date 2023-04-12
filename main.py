@@ -12,7 +12,7 @@ voices = engine.getProperty('voices')
 engine.setProperty('voice',voices[0].id) # 0 = male, 1 = female
 activationWord = 'computer' # single word
 
-chrome_path = r"C:\Program Files\Chrome\Application\chrome.exe"
+chrome_path = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
 webbrowser.register('chrome', None, webbrowser.BackgroundBrowser(chrome_path))
 
 def speak(text, rate = 120):
@@ -46,16 +46,31 @@ def search_wikipedia(query = ''):
         print('No wikipedia result')
         return 'No results received'
     try:
-        wikipedia = wikipedia.page(searchResults[0])
+        wikiPage = wikipedia.page(searchResults[0])
     except wikipedia.DisambiguationError as error:
         wikiPage = wikipedia.page(error.option[0])
     print(wikiPage.title)        
     wikiSummary = str(wikiPage.summary)
     return wikiSummary
 
+def
+
+def saerch_wolframalpha(query = ''):
+    response = wolframalpha.query(query)
+    if response['@success'] == 'false':
+        return 'Could not compute'
+    else:
+        result = ''
+        pod0 = response['pod'][0]
+        
+        pod1 = response['pod'][1]
+        
+        if (('result') in pod1['@title'].lower()) or (pod1.get('@primary', 'false') == 'true') or ('destination' in pod1['@title'].lower()):
+            
+
 # Main loop
 if __name__ == '__main__':
-    speak('All systems nominal.')
+    speak('This is an AI Developed by Daniel Please speak your query and i shall provide with what you want.')
     
     while True:
         # Parse as a list
@@ -84,4 +99,12 @@ if __name__ == '__main__':
                 query = ' '.join(query[1:])
                 speak('Querying the universal databank.')
                 speak(search_wikipedia(query))
-                
+            
+            if query[0] == 'compute' or query[0] == 'computer':
+                query = ' '.join(query[1:])
+                speak('Computing.')
+                try:
+                    result = search_wolframalpha(query)
+                    speak(result)
+                except:
+                    speak('Unable to compute')
