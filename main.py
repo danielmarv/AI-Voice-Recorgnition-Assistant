@@ -12,6 +12,9 @@ voices = engine.getProperty('voices')
 engine.setProperty('voice',voices[0].id) # 0 = male, 1 = female
 activationWord = 'computer' # single word
 
+chrome_path = r"C:\Program Files\Chrome\Application\chrome.exe"
+webbrowser.register('chrome', None, webbrowser.BackgroundBrowser(chrome_path))
+
 def speak(text, rate = 120):
     engine.setProperty('rate', rate)
     engine.say(text)
@@ -40,7 +43,7 @@ def parseCommand():
 def search_wikipedia(query = ''):
     searchResults = wikipedia.search(query)
     if not searchResults:
-        print(exception)
+        print('No wikipedia result')
         return 'No results received'
     try:
         wikipedia = wikipedia.page(searchResults[0])
@@ -80,3 +83,5 @@ if __name__ == '__main__':
             if query[0] == 'wikipedia':
                 query = ' '.join(query[1:])
                 speak('Querying the universal databank.')
+                speak(search_wikipedia(query))
+                
