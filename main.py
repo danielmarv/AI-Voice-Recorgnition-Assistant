@@ -121,3 +121,16 @@ if __name__ == '__main__':
                     speak(result)
                 except:
                     speak('Unable to compute')
+            
+            if query[0] == 'log':
+                speak('Ready to read your note') 
+                newNote = parseCommand().lower()
+                now = datetime.now().strftime('%Y-%m-%d-%H-%M-%S')
+                with open('note_%s.txt' % now, 'w') as newFile:
+                    newfile.write(newNote)
+                speak('Note written')
+                
+            if query[0] == 'exit':
+                speak('Goodbye')
+                break       
+    
