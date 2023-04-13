@@ -15,6 +15,9 @@ activationWord = 'computer' # single word
 chrome_path = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
 webbrowser.register('chrome', None, webbrowser.BackgroundBrowser(chrome_path))
 
+appId = ''
+wolframClient = wolframalpha.Client(appId)
+
 def speak(text, rate = 120):
     engine.setProperty('rate', rate)
     engine.say(text)
