@@ -15,7 +15,7 @@ activationWord = 'computer' # single word
 chrome_path = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
 webbrowser.register('chrome', None, webbrowser.BackgroundBrowser(chrome_path))
 
-appId = ''
+appId = 'J3TQWQ-8LHVY23T8Q'
 wolframClient = wolframalpha.Client(appId)
 
 def speak(text, rate = 120):
@@ -126,7 +126,7 @@ if __name__ == '__main__':
                     speak('Unable to compute')
             
             if query[0] == 'log':
-                speak('Ready to read your note') 
+                speak('Ready to write your note') 
                 newNote = parseCommand().lower()
                 now = datetime.now().strftime('%Y-%m-%d-%H-%M-%S')
                 with open('note_%s.txt' % now, 'w') as newFile:
